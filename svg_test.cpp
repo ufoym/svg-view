@@ -95,13 +95,13 @@ public:
 		
         char buf[128]; 
         agg::gsv_text t;
-        t.size(10.0);
+        t.size(8.0);
         t.flip(true);
 
         agg::conv_stroke<agg::gsv_text> pt(t);
         pt.width(1.5);
 
-        sprintf(buf, "Vertices=%d Time=%.3f ms", vertex_count, tm);
+        sprintf(buf, "Scale=%2.1f Time=%.3f ms", m_scale, tm);
 
         t.start_point(10.0, 20.0);
         t.text(buf);
@@ -143,12 +143,14 @@ public:
     {
         if(key == 'a')
 		{
-			m_scale *= 1.2;
+			if (m_scale < 50)
+				m_scale *= 1.2;
 			force_redraw();
 		}
 		else if(key == 's')
 		{
-			m_scale *= 0.8;
+			if (m_scale > 0.5)
+				m_scale *= 0.8;
 			force_redraw();
 		}
     }
